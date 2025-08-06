@@ -1,0 +1,14 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { SessionRoutingModule } from './session-routing.module';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { share } from 'rxjs';
+import { SharedModule } from '../../shared/shared.module';
+
+@NgModule({
+  declarations: [LoginComponent, RegisterComponent],
+  imports: [CommonModule, SessionRoutingModule, SharedModule],
+})
+export class SessionModule {}
