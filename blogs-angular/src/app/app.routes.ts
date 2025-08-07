@@ -27,10 +27,22 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       {
-        path: '',
+        path: 'blogs',
+        loadChildren: () =>
+          import('./modules/home/home.module').then((m) => m.HomeModule),
+      },
+      {
+        path: 'dashboard', 
         loadChildren: () =>
           import('./modules/dashboard/dashboard.module').then(
             (m) => m.DashboardModule
+          ),
+      },
+      {
+        path: 'my-blogs',
+        loadChildren: () =>
+          import('./modules/my-blogs/my-blogs.module').then(
+            (m) => m.MyBlogsModule
           ),
       },
     ],

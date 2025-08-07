@@ -1,1 +1,99 @@
-<p>register works!</p>
+<section class="w-full h-screen">
+  <div class="w-full grid grid-cols-3 h-full">
+    <div
+      class="content-section col-span-2 bg-[#6b70b1] p-50 flex justify-start items-center"
+    >
+      <div class="content w-[70%]">
+        <div class="title text-[2.5rem] text-white font-extrabold">
+          Welcome to GK blogging
+        </div>
+        <h4 class="text-[1.2rem] text-white mt-10">
+          Create, share, and discover powerful content with our intuitive
+          blogging platform. Whether you're sharing the latest news, writing
+          thoughtful articles, or exploring trending topics by category — your
+          voice matters. Collaborate with multiple users, post with ease, and
+          bring your ideas to life.
+        </h4>
+      </div>
+    </div>
+    <div class="">
+      <!-- form-section -->
+      <div class="py-[50px] px-[100px]">
+        <!-- Logo -->
+        <div class="logo w-[80px] h-[80px] mt-[50px] p-2">
+          <img src="assets/images/gk-logo-img.png" class="w-full" alt="" />
+        </div>
+
+        <!-- Sign in -->
+        <!-- Don't have an account? Sign up -->
+
+        <h2 class="font-bold text-4xl mt-[20px]">Sign up</h2>
+        <h4 class="text-[16px] mt-[10px]">
+          Already have an account?
+          <a class="text-indigo-600" routerLink="/session/login">Sign in</a>
+        </h4>
+
+        <div class="form-section flex flex-col mt-[20px]">
+          <div class="grid grid-cols-2 gap-2">
+            <mat-form-field appearance="outline" class="mt-2">
+              <mat-label>First Name</mat-label>
+              <input matInput />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="mt-2">
+              <mat-label>Last Name</mat-label>
+              <input matInput />
+            </mat-form-field>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <mat-form-field appearance="outline" class="mt-2">
+              <mat-label>Mobile Number</mat-label>
+              <input matInput />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="mt-2">
+              <mat-label>Email Address</mat-label>
+              <input matInput />
+            </mat-form-field>
+          </div>
+
+          <div class="grid grid-cols-1">
+            <mat-form-field appearance="outline" class="mt-2">
+              <mat-label>Address</mat-label>
+              <textarea matInput placeholder="Address"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <mat-form-field appearance="outline" class="mt-2">
+              <mat-label>State</mat-label>
+              <input matInput />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="mt-2">
+              <mat-label>District</mat-label>
+              <input matInput />
+            </mat-form-field>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <mat-form-field appearance="outline" class="mt-2">
+              <mat-label>pincode</mat-label>
+              <input matInput />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="mt-2">
+              <mat-label>Password</mat-label>
+              <input matInput />
+            </mat-form-field>
+          </div>
+
+          <div class="flex justify-center mt-10">
+            <button type="button"
+              class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full w-[100%]"
+            >
+              Sign up
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+mat-drawer {
+  width: 15%;
+  border-radius: 0px;
+  margin: 0;
+  border: 0;
+}
+
+mat-toolbar {
+  /* position: fixed; */
+  background: #6267a9;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px;
+  margin: 0;
+}
+
+.active-link {
+  background-color: white;
+  color: #6267a9;
+  border-radius: 10px;
+}
