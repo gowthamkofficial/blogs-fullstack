@@ -1,0 +1,72 @@
+<section class="w-full h-auto">
+  <div class="title mt-5 border-b-1 border-gray-400 pb-5">
+    <p class="text-[1.2rem] font-[600]">Comments (21)</p>
+  </div>
+
+  <div class="author mt-5 flex items-center gap-3">
+    <img
+      class="w-10 h-10 rounded-full"
+      src="assets/images/men.png"
+      alt="User"
+    />
+    <p class="font-[500]">Steve Vaughn</p>
+  </div>
+
+  <div class="comment-form w-full mt-5">
+    <div class="relative w-full max-w-full overflow-x-hidden">
+      <mat-form-field appearance="outline" class="w-full !m-0">
+        <mat-label>Comments</mat-label>
+        <textarea matInput rows="4" class="pr-14 resize-none"></textarea>
+      </mat-form-field>
+
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Post comment"
+        class="!absolute right-1 bottom-6 !z-10"
+      >
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="comment-list">
+    <ng-container
+      *ngFor="
+        let data of [
+          1, 2, 3, 1, 1, 1, 11, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1
+        ]
+      "
+    >
+      <div class="comment border-b-1 border-gray-200 py-4">
+        <div class="author mt-5 flex justify-between items-center gap-3">
+          <div class="flex items-center gap-3">
+            <img
+              class="w-10 h-10 rounded-full"
+              src="assets/images/men.png"
+              alt="User"
+            />
+            <p class="font-[500]">Steve Vaughn</p>
+          </div>
+          <button matIconButton [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </div>
+        <div class="ml-5 mt-2">
+          <p class="text-gray-600 text-[1rem]">
+            This is a sample comment to demonstrate the comments section.
+          </p>
+          <span class="text-gray-500 text-[0.8rem]">2 minutes ago</span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</section>

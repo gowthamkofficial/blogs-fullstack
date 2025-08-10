@@ -32,7 +32,7 @@ export const routes: Routes = [
           import('./modules/home/home.module').then((m) => m.HomeModule),
       },
       {
-        path: 'dashboard', 
+        path: 'dashboard',
         loadChildren: () =>
           import('./modules/dashboard/dashboard.module').then(
             (m) => m.DashboardModule
@@ -43,6 +43,13 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./modules/my-blogs/my-blogs.module').then(
             (m) => m.MyBlogsModule
+          ),
+      },
+      {
+        path: 'my-profile',
+        loadChildren: () =>
+          import('./modules/my-profile/my-profile.module').then(
+            (m) => m.MyProfileModule
           ),
       },
     ],

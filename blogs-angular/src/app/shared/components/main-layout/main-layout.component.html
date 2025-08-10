@@ -37,7 +37,7 @@
               class="text-[1rem] px-[15px] py-[10px] text-white mt-[20px] hover:bg-white hover:text-[#6267a9] hover:rounded-[10px] flex items-center gap-2"
             >
               <mat-icon>person</mat-icon>
-              <a href="">My Profile</a>
+              <a routerLink="/my-profile">My Profile</a>
             </li>
           </ul>
         </div>
@@ -55,7 +55,34 @@
       </div>
     </div>
   </mat-drawer>
+
+  <mat-drawer 
+    #rightDrawer
+    position="end"
+    mode="over"
+    class= " right-drawer w-[600px] overflow-y-auto bg-white p-4"
+  >
+    <app-comments
+      *ngIf="(drawerService.drawer$ | async) == 'comments'"
+    ></app-comments>
+  </mat-drawer>
   <mat-drawer-content>
-    <router-outlet></router-outlet>
+    <div class="sticky top-0 z-50">
+      <mat-toolbar
+        class="border-l-1 border-white rounded-[8px] flex items-center justify-end"
+      >
+        <span class="flex gap-x-5 items-center text-[1rem] text-white uppercase"
+          >Steve Vaughn<img
+            src="assets/images/men.png"
+            class="w-10 h-10 rounded-full"
+            alt=""
+            srcset=""
+        /></span>
+      </mat-toolbar>
+    </div>
+
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>
