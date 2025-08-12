@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DrawerService } from '../../../core/service/drawer.service';
 
 @Component({
   selector: 'app-view',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
   standalone:false
 })
 export class ViewComponent {
+  constructor(private drawerService: DrawerService) {}
 
+  openCommentsDrawer() {
+    this.drawerService.openDrawer('comments');
+  }
 }

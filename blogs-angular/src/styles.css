@@ -15,3 +15,12 @@ body {
 .mdc-text-field--outlined .mat-mdc-notch-piece.mdc-notched-outline__notch {
   border-right: 0 !important;
 }
+
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: transparent !important;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
+}

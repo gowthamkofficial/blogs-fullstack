@@ -1,13 +1,85 @@
-<section class="w-full h-full p-10">
-  <div class="page-heading">
-    <h2 class="text-2xl font-[600]">My Profile</h2>
-  </div>
+<section class="w-full h-auto">
+  <div class="content grid grid-cols-4 gap-5 my-20 mx-30">
+    <div
+      class="shadow-2xl py-20 rounded-2xl card w-full image-section col-span-1 flex flex-col items-center justify-between"
+    >
+      <div class="flex flex-col items-center">
+        <div class="rounded-full flex justify-center items-center mt-10">
+          <img class="w-[150px] h-[150px]" src="assets/images/men.png" alt="" />
+        </div>
 
-  <div class="container w-full h-full px-20 py-10">
-    <div class="profile-section">
-      <img src="assets/images/men.png" class="rounded-full w-30 h-30" alt="" />
-      <div class="profile-edit">
-        <button class="rounded-[0px]" mat-stroked-button>Update New Photo</button>
+        <span class="text-[1rem] cursor-pointer text-blue-500 mt-5"
+          ><a>Change</a></span
+        >
+      </div>
+      <div class="qoute mt-20 text-center px-10">
+        <h4 class="text-[1.2rem] font-[600] capitalize">Quote of the day</h4>
+
+        <p class="mt-5">
+          "Do what you can, with what you have, where you are." — Theodore
+          Roosevelt
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="shadow-2xl py-10 px-10 rounded-2xl card profile-info col-span-3 min-h-10"
+    >
+      <div class="title text-2xl font-[600]"><h2>Personl Info</h2></div>
+
+      <div class="form-section grid gap-4 mt-10 mx-5 px-10">
+        <div class="grid grid-cols-2 gap-5">
+          <mat-form-field appearance="fill" class="mt-2">
+            <mat-label>First Name</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="mt-2">
+            <mat-label>Last Name</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+
+        <div class="grid grid-cols-2 gap-5">
+          <mat-form-field appearance="fill" class="mt-2">
+            <mat-label>Mobile Number</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="mt-2">
+            <mat-label>Email Address</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+
+        <div class="grid grid-cols-2 gap-5">
+          <mat-form-field appearance="fill" class="mt-2">
+            <mat-label>State</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="mt-2">
+            <mat-label>District</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+
+        <div class="grid grid-cols-2 gap-5">
+          <div class="w-full flex flex-col justify-end">
+            <mat-form-field appearance="fill" class="mt-2 w-full">
+              <mat-label>pincode</mat-label>
+              <input matInput />
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="fill" class="mt-2">
+            <mat-label>Address</mat-label>
+            <textarea matInput></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="btn-section float-end mr-10">
+        <button mat-raised-button color="priamry" class="!bg-[#6267a9] !text-white !rounded-[5px] w-30">
+          Update
+        </button>
       </div>
     </div>
   </div>

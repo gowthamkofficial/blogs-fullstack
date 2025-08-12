@@ -1,1 +1,34 @@
-<p>list works!</p>
+<main class="w-full px-10 py-10">
+  <section class="w-full content-title flex justify-between items-center">
+    <h2 class="text-[1.2rem] font-[600]">My Blogs (21)</h2>
+    <div class="create-btn">
+      <button routerLink="/my-blogs/create"
+        class="!bg-[#6267a9] !w-[150px] !text-white !text-[1rem] !rounded-[10px]"
+        mat-raised-button
+      >
+        New Blog
+      </button>
+    </div>
+  </section>
+
+  <section class="table-section mt-10 bg-white w-full min-h-[500px]">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container *ngFor="let col of displayedColumns">
+        <ng-container [matColumnDef]="col">
+          <th mat-header-cell *matHeaderCellDef>{{ col }}</th>
+          <td mat-cell *matCellDef="let element">{{ element[col] }}</td>
+        </ng-container>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator
+      [length]="this.blogs.length"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </section>
+</main>

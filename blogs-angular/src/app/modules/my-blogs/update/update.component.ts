@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-update',
@@ -6,4 +7,8 @@ import { Component } from '@angular/core';
   templateUrl: './update.component.html',
   styleUrl: './update.component.css',
 })
-export class UpdateComponent {}
+export class UpdateComponent {
+  createForm = new FormGroup({
+    content: new FormControl(''),
+  });
+}

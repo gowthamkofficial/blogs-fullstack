@@ -6,15 +6,11 @@ import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '',
-    pathMatch: 'full',
-  },
-  {
-    path: '',
-    component: ListComponent,
-  },
+  { path: 'my-blogs', redirectTo: '', pathMatch: 'full' },
+{
+  path:"",
+  component:ListComponent
+},
   {
     path: 'view/:id',
     component: ViewComponent,
