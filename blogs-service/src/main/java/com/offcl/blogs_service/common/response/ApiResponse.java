@@ -11,10 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Response<T> {
-
+public class ApiResponse <T> {
 	private ResponseStatus status;
 	private String message;
 	private T data;
-	
 }
