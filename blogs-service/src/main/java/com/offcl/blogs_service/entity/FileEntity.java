@@ -22,4 +22,5 @@ public class FileEntity  extends BaseEntity {
 	    private String fileName;
 	    private String fileType;
 	    private String filePath;
+	    private Long fileSize;
 }
