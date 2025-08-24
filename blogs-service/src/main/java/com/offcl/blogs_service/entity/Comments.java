@@ -1,5 +1,7 @@
 package com.offcl.blogs_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,9 +29,11 @@ public class Comments  extends BaseEntity {
 	
 	@ManyToOne()
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private User user;
 	
 	@ManyToOne()
 	@JoinColumn(name = "blog_id")
+	@JsonIgnore
 	private Blogs blog;
 }

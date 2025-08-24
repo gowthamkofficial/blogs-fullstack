@@ -18,4 +18,5 @@ public class UserResponseDto {
 	private String district;
 	private String address;
 	private String pincode;
+	private String profileImageUrl;
 }

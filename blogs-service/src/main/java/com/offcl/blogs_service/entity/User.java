@@ -2,6 +2,8 @@ package com.offcl.blogs_service.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -47,12 +49,15 @@ public class User  extends BaseEntity {
 	private FileEntity profile;
 	
 	@OneToMany(mappedBy = "user",cascade =  CascadeType.ALL)
+	@JsonIgnore
 	private List<Blogs> blogs;
 	
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Comments> comments;
 	
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Likes> likes;
 
 }
