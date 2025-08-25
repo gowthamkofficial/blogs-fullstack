@@ -32,6 +32,12 @@ public class UserController {
 	private UserService userService;
 	
 	
+	@GetMapping("/user/{userId}")
+	public ResponseEntity<ApiResponse<UserResponseDto>> getUserById(@PathVariable(required = true) Long userId){
+		return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(userId));
+	}
+	
+	
 	@GetMapping("/blogs/{userId}")
 	public ResponseEntity<ApiResponse<PagedResponse<BlogResponseDto>>> getBlogs(
 			@PathVariable(required = true) Long userId,

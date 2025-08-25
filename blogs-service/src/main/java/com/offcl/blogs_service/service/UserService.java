@@ -47,6 +47,16 @@ public class UserService {
 
 	@Autowired
 	private FileRepository fileRepo;
+	
+	
+	public ApiResponse<UserResponseDto> getUserById(Long id){
+
+		User existingUser = this.userRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("User not found with id " +id));
+		
+		return  new ApiResponse<>(ResponseStatus.Success, "Fetched user successfully", UserMapper.mapUserResponse(existingUser));
+	}
+	
 
 	
 	

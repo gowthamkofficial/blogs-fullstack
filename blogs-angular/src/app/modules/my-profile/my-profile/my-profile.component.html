@@ -1,20 +1,49 @@
 <section class="w-full h-auto">
   <div class="content grid grid-cols-4 gap-5 my-20 mx-30">
+    <!-- Profile Image & Quote -->
     <div
       class="shadow-2xl py-20 rounded-2xl card w-full image-section col-span-1 flex flex-col items-center justify-between"
     >
-      <div class="flex flex-col items-center">
+      <!-- <div class="flex flex-col items-center">
         <div class="rounded-full flex justify-center items-center mt-10">
           <img class="w-[150px] h-[150px]" src="assets/images/men.png" alt="" />
         </div>
+        <span class="text-[1rem] cursor-pointer text-blue-500 mt-5">
+          <a>Change</a>
+        </span>
+      </div> -->
 
-        <span class="text-[1rem] cursor-pointer text-blue-500 mt-5"
-          ><a>Change</a></span
+      <div class="rounded-full flex flex-col items-center justify-center mt-10">
+        <img
+        class="w-[150px] h-[150px] rounded-full object-cover"
+        [src]="getProfileImageUrl()"
+        alt="Profile Image"
+      />
+
+        <span class="text-[1rem] cursor-pointer text-blue-500 mt-5">
+          <label for="profileImage" class="cursor-pointer">Change </label>
+          <input
+            type="file"
+            id="profileImage"
+            (change)="onFileSelected($event)"
+            hidden
+          />
+        </span>
+
+        <button
+          *ngIf="profileImageFile"
+          mat-raised-button
+          color="primary"
+          class="mt-2"
+          type="button"
+          (click)="uploadProfileImage()"
         >
+          Upload Image 
+        </button>
       </div>
-      <div class="qoute mt-20 text-center px-10">
-        <h4 class="text-[1.2rem] font-[600] capitalize">Quote of the day</h4>
 
+      <div class="quote mt-20 text-center px-10">
+        <h4 class="text-[1.2rem] font-[600] capitalize">Quote of the day</h4>
         <p class="mt-5">
           "Do what you can, with what you have, where you are." — Theodore
           Roosevelt
@@ -22,65 +51,114 @@
       </div>
     </div>
 
+    <!-- Profile Info Form -->
     <div
       class="shadow-2xl py-10 px-10 rounded-2xl card profile-info col-span-3 min-h-10"
     >
-      <div class="title text-2xl font-[600]"><h2>Personl Info</h2></div>
+      <div class="title text-2xl font-[600] flex justify-between items-center">
+        <h2>Personal Info</h2>
 
-      <div class="form-section grid gap-4 mt-10 mx-5 px-10">
+        <!-- FAB Edit Button -->
+        <div *ngIf="!editMode" class="edit-icon">
+          <button mat-fab (click)="enableEdit()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <form
+        [formGroup]="profileForm"
+        class="form-section grid gap-4 mt-10 mx-5 px-10"
+      >
+        <!-- First & Last Name -->
         <div class="grid grid-cols-2 gap-5">
           <mat-form-field appearance="fill" class="mt-2">
             <mat-label>First Name</mat-label>
-            <input matInput />
+            <input
+              matInput
+              formControlName="firstName"
+              [readonly]="!editMode"
+            />
           </mat-form-field>
           <mat-form-field appearance="fill" class="mt-2">
             <mat-label>Last Name</mat-label>
-            <input matInput />
+            <input matInput formControlName="lastName" [readonly]="!editMode" />
           </mat-form-field>
         </div>
 
+        <!-- Mobile & Email -->
         <div class="grid grid-cols-2 gap-5">
           <mat-form-field appearance="fill" class="mt-2">
             <mat-label>Mobile Number</mat-label>
-            <input matInput />
+            <input
+              matInput
+              formControlName="mobileNumber"
+              [readonly]="!editMode"
+            />
           </mat-form-field>
           <mat-form-field appearance="fill" class="mt-2">
             <mat-label>Email Address</mat-label>
-            <input matInput />
+            <input
+              matInput
+              formControlName="emailAddress"
+              [readonly]="!editMode"
+            />
           </mat-form-field>
         </div>
 
+        <!-- State & District -->
         <div class="grid grid-cols-2 gap-5">
           <mat-form-field appearance="fill" class="mt-2">
             <mat-label>State</mat-label>
-            <input matInput />
+            <input matInput formControlName="state" [readonly]="!editMode" />
           </mat-form-field>
           <mat-form-field appearance="fill" class="mt-2">
             <mat-label>District</mat-label>
-            <input matInput />
+            <input matInput formControlName="district" [readonly]="!editMode" />
           </mat-form-field>
         </div>
 
+        <!-- Pincode & Address -->
         <div class="grid grid-cols-2 gap-5">
-          <div class="w-full flex flex-col justify-end">
-            <mat-form-field appearance="fill" class="mt-2 w-full">
-              <mat-label>pincode</mat-label>
-              <input matInput />
-            </mat-form-field>
-          </div>
-
+          <mat-form-field appearance="fill" class="mt-2">
+            <mat-label>Pincode</mat-label>
+            <input matInput formControlName="pincode" [readonly]="!editMode" />
+          </mat-form-field>
           <mat-form-field appearance="fill" class="mt-2">
             <mat-label>Address</mat-label>
-            <textarea matInput></textarea>
+            <textarea
+              matInput
+              formControlName="address"
+              [readonly]="!editMode"
+            ></textarea>
           </mat-form-field>
         </div>
-      </div>
 
-      <div class="btn-section float-end mr-10">
-        <button mat-raised-button color="priamry" class="!bg-[#6267a9] !text-white !rounded-[5px] w-30">
-          Update
-        </button>
-      </div>
+        <!-- Update + Cancel Buttons -->
+        <div
+          *ngIf="editMode"
+          class="btn-section flex justify-end gap-3 mt-5 mr-10"
+        >
+          <button
+            mat-raised-button
+            color="warn"
+            class="!bg-red-500 !text-white !rounded-[5px] w-30"
+            type="button"
+            (click)="cancelEdit()"
+          >
+            Cancel
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            class="!bg-[#6267a9] !text-white !rounded-[5px] w-30"
+            type="button"
+            (click)="updateProfile()"
+          >
+            Update
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </section>

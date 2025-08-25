@@ -7,7 +7,7 @@ export const authenticatedGuard: CanActivateFn = (route, state) => {
   const platformId = inject(PLATFORM_ID);
 
   if (isPlatformBrowser(platformId)) {
-    const isLoggedIn = sessionStorage.getItem('LOGGEDIN') === 'true';
+    const isLoggedIn = sessionStorage.getItem('LOGGED_IN') === 'true';
 
     if (isLoggedIn) {
       router.navigate(['/blogs/list']); // redirect to blogs/list

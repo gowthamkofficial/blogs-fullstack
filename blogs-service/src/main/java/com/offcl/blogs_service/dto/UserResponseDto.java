@@ -19,4 +19,5 @@ public class UserResponseDto {
 	private String address;
 	private String pincode;
 	private String profileImageUrl;
+	private Long userId;
 }

@@ -13,7 +13,7 @@ export const routes: Routes = [
   {
     path: '',
     component: AuthLayoutComponent,
-    // canActivate:[authGaurd],
+    canActivate:[authenticatedGuard],
     children: [
       {
         path: 'session',
@@ -28,7 +28,7 @@ export const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
-    // canActivate:[authenticatedGuard],
+    canActivate:[authGaurd],
     children: [
       {
         path: 'blogs',

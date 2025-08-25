@@ -23,6 +23,7 @@ export class UserResponseDto {
   address: string;
   pincode: string;
   profileImageUrl: string;
+  userId:any
 }
 
 export class UserLoginRequestDto {

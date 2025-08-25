@@ -1,5 +1,6 @@
 <section class="w-full h-screen">
   <div class="w-full grid grid-cols-3 h-full">
+    <!-- Left content -->
     <div
       class="content-section col-span-2 bg-[#6b70b1] p-50 flex justify-start items-center"
     >
@@ -16,43 +17,70 @@
         </h4>
       </div>
     </div>
-    <div class="">
-      <!-- form-section -->
+
+    <!-- Right form -->
+    <div>
       <div class="p-[50px]">
         <!-- Logo -->
         <div class="logo w-[80px] h-[80px] mt-[50px] p-2">
-          <img src="assets/images/gk-logo-img.png" class="w-full" alt="" />
+          <img
+            src="assets/images/gk-logo-img.png"
+            class="w-full"
+            alt="GK Logo"
+          />
         </div>
 
         <!-- Sign in -->
-        <!-- Don't have an account? Sign up -->
-
         <h2 class="font-bold text-4xl mt-[20px]">Sign in</h2>
         <h4 class="text-[16px] mt-[10px]">
           Don't have an account?
           <a class="text-indigo-600" routerLink="/session/register">Sign up</a>
         </h4>
-        <div class="w-full  content-center ">
-          <div class="form-section flex flex-col mt-[50px] w-[80%]">
-            <mat-form-field appearance="outline" class="mt-5">
-              <mat-label>Email</mat-label>
-              <input matInput />
-            </mat-form-field>
 
-            <mat-form-field appearance="outline" class="mt-5 mb-2">
-              <mat-label>Password</mat-label>
-              <input matInput type="password" />
-            </mat-form-field>
+        <div class="w-full content-center">
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="form-section flex flex-col mt-[50px] w-[80%]">
+              <!-- Email -->
+              <mat-form-field appearance="outline" class="mt-5">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" />
+                <mat-hint
+                  *ngIf="
+                    form['email'].invalid &&
+                    (form['email'].touched || form['email'].dirty)
+                  "
+                  class="error"
+                >
+                  {{ showError("email", "Email", "Provide") }}
+                </mat-hint>
+              </mat-form-field>
 
-            <div class="flex justify-center mt-5">
-              <button
-               (click)="showToaster()"
-                class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full w-[100%]"
-              >
-                Sign in
-              </button>
+              <!-- Password -->
+              <mat-form-field appearance="outline" class="mt-5 mb-2 w-full">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="password" />
+                <mat-hint
+                  *ngIf="
+                    form['password'].invalid &&
+                    (form['password'].touched || form['password'].dirty)
+                  "
+                  class="error"
+                >
+                  {{ showError("password", "Password", "Provide") }}
+                </mat-hint>
+              </mat-form-field>
+
+              <!-- Submit -->
+              <div class="flex justify-center mt-5">
+                <button (click)="login()"
+                  type="submit"
+                  class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full w-[100%]"
+                >
+                  Sign in
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

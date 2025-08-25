@@ -8,7 +8,7 @@ export const authGaurd: CanActivateFn = (route, state) => {
 
   // Only check sessionStorage in browser
   if (isPlatformBrowser(platformId)) {
-    const isLoggedIn = sessionStorage.getItem('LOGGEDIN') === 'true';
+    const isLoggedIn = sessionStorage.getItem('LOGGED_IN') === 'true';
 
     if (isLoggedIn) {
       return true;
