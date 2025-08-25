@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './shared/components/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
+import { authenticatedGuard } from './core/gaurd/authenticated.guard';
+import { authGaurd } from './core/gaurd/auth.guard';
 
 export const routes: Routes = [
   {
@@ -11,6 +13,7 @@ export const routes: Routes = [
   {
     path: '',
     component: AuthLayoutComponent,
+    // canActivate:[authGaurd],
     children: [
       {
         path: 'session',
@@ -25,6 +28,7 @@ export const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
+    // canActivate:[authenticatedGuard],
     children: [
       {
         path: 'blogs',
