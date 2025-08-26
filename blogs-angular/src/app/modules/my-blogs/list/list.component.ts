@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { PaginationDTO } from '../../../core/dto/paginationDto';
 import { UserResponseDto } from '../../../core/dto/UserDto';
 import { checkNull } from '../../../core/helper/checknull';
@@ -56,8 +56,8 @@ export class ListComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.dataSource = new MatTableDataSource(res.data?.content ?? []);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
+          // this.dataSource.paginator = this.paginator;
+          // this.dataSource.sort = this.sort;
           this.paginationDto.totalElements = res.data.totalElements ?? 0;
           this.paginationDto.totalPages = res.data.totalPages ?? 0;
           this.loader.close();
@@ -72,12 +72,19 @@ export class ListComponent implements OnInit {
       });
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value
-      .trim()
-      .toLowerCase();
-    this.dataSource.filter = filterValue;
+  onPageChange(event: PageEvent) {
+    this.paginationDto.page = event.pageIndex;
+    this.paginationDto.size = event.pageSize;
+    this.getAllBlogs();
   }
+
+
+   onSortChange(sortState: Sort) {
+    this.paginationDto.sortBy = sortState.active;
+    this.paginationDto.sortDir = sortState.direction || 'asc'; 
+    this.getAllBlogs();
+  }
+
 
   onView(blog: BlogResponseDto) {
     this.router.navigate([`/my-blogs/view/${blog.blogId}`], { state: blog });
