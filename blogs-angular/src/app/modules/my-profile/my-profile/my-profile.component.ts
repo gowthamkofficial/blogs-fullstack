@@ -188,7 +188,7 @@ export class MyProfileComponent implements OnInit {
 
         if (res?.data?.fileUrl) {
           this.profileForm.patchValue({ profileImageUrl: res.data.fileUrl });
-          this.profileImagePreview = res.data.fileUrl;
+          this.profileImagePreview = '';
         }
       },
       error: (err) => {
