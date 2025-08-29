@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import com.offcl.blogs_service.common.enums.ResponseStatus;
@@ -25,6 +26,17 @@ public class GlobalExceptionHandler {
                 .build();
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+    
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<ApiResponse<?>> handleMaxUploadSizeExceeded(MaxUploadSizeExceededException ex) {
+        ApiResponse<?> response = ApiResponse.builder()
+                .status(ResponseStatus.Failure)
+                .message("File size exceeds the allowed limit!")
+                .data(null)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body(response); // 413
     }
 
     // 🔹 Validation errors (400)

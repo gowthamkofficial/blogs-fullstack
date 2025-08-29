@@ -1,57 +1,71 @@
 <section class="w-full h-auto">
-  <div class="title mt-5 border-b-1 border-gray-400 pb-5">
-    <p class="text-[1.2rem] font-[600]">Comments (21)</p>
+  <div
+    class="title mt-5 border-b-1 border-gray-400 pb-5 flex justify-between items-center"
+  >
+    <p class="text-[1.2rem] font-[600]">
+      Comments ({{ comments?.length || 0 }})
+    </p>
+
+    <!-- Close button -->
+    <button
+      mat-icon-button
+      color="warn"
+      (click)="closeDrawer()"
+      aria-label="Close comments"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
 
-  <div class="author mt-5 flex items-center gap-3">
-    <img
-      class="w-10 h-10 rounded-full"
-      src="assets/images/men.png"
-      alt="User"
-    />
-    <p class="font-[500]">Steve Vaughn</p>
-  </div>
-
-  <div class="comment-form w-full mt-5">
+  <!-- Comment form -->
+  <form
+    [formGroup]="commentForm"
+    (ngSubmit)="createComment()"
+    class="comment-form w-full mt-5"
+  >
     <div class="relative w-full max-w-full overflow-x-hidden">
       <mat-form-field appearance="outline" class="w-full !m-0">
-        <mat-label>Comments</mat-label>
-        <textarea matInput rows="4" class="pr-14 resize-none"></textarea>
+        <mat-label>Write a comment...</mat-label>
+        <textarea
+          matInput
+          rows="3"
+          formControlName="commentText"
+          class="pr-14 resize-none"
+        ></textarea>
       </mat-form-field>
 
       <button
         mat-icon-button
         color="primary"
+        type="submit"
+        [disabled]="commentForm.invalid"
         aria-label="Post comment"
         class="!absolute right-1 bottom-6 !z-10"
       >
         <mat-icon>send</mat-icon>
       </button>
     </div>
-  </div>
+  </form>
 
-  <div class="comment-list">
-    <ng-container
-      *ngFor="
-        let data of [
-          1, 2, 3, 1, 1, 1, 11, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-          1, 1, 1, 1, 1, 1, 1, 1
-        ]
-      "
-    >
-      <div class="comment border-b-1 border-gray-200 py-4">
-        <div class="author mt-5 flex justify-between items-center gap-3">
+  <!-- Comments list -->
+  <div class="comment-list mt-5">
+    <ng-container *ngIf="comments?.length > 0; else noComments">
+      <div
+        *ngFor="let c of comments"
+        class="comment border-b-1 border-gray-200 py-4"
+      >
+        <div class="author mt-2 flex justify-between items-center gap-3">
           <div class="flex items-center gap-3">
             <img
               class="w-10 h-10 rounded-full"
-              src="assets/images/men.png"
+              [src]="getImageURI(c.user?.profileImageUrl)"
               alt="User"
             />
-            <p class="font-[500]">Steve Vaughn</p>
+            <p class="font-[500]">{{ c.user?.fullName || "Anonymous" }}</p>
           </div>
-          <button matIconButton [matMenuTriggerFor]="menu">
+          <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
-          </button>
+          </button> -->
 
           <mat-menu #menu="matMenu">
             <button mat-menu-item>
@@ -60,13 +74,20 @@
             </button>
           </mat-menu>
         </div>
+
         <div class="ml-5 mt-2">
-          <p class="text-gray-600 text-[1rem]">
-            This is a sample comment to demonstrate the comments section.
-          </p>
-          <span class="text-gray-500 text-[0.8rem]">2 minutes ago</span>
+          <p class="text-gray-600 text-[1rem]">{{ c.commentText }}</p>
+          <span class="text-gray-500 text-[0.8rem]">
+            {{ c.createdOn | date : "short" }}
+          </span>
         </div>
       </div>
     </ng-container>
+
+    <ng-template #noComments>
+      <p class="text-gray-500 mt-3">
+        No comments yet. Be the first to comment!
+      </p>
+    </ng-template>
   </div>
 </section>

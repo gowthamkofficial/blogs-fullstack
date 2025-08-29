@@ -6,6 +6,7 @@ import { BlogResponseDto } from '../../../core/dto/BlogDto';
 import { PaginationDTO } from '../../../core/dto/paginationDto';
 import { ApiResponse } from '../../../core/response/ApiResponse';
 import { PagedResponse } from '../../../core/response/PagedResponse';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-blogs',
@@ -37,7 +38,7 @@ export class BlogsComponent implements OnInit {
     this.loading = true;
     this.loader.open();
 
-    this.homeService.getAllblogs(this.paginationDto).subscribe({
+    this.homeService.getAllblogs(this.paginationDto).pipe(delay(500)).subscribe({
       next: (res: ApiResponse<PagedResponse<BlogResponseDto>>) => {
         if (res?.data?.content) {
           this.blogList = [...this.blogList, ...res.data.content];
@@ -56,9 +57,7 @@ export class BlogsComponent implements OnInit {
   }
 
   onScroll(event): void {
-
-    console.log(event,"scrolled");
-    
     this.getAllBlogs();
   }
+
 }

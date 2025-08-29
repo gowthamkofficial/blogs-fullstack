@@ -21,7 +21,7 @@
       />
 
         <span class="text-[1rem] cursor-pointer text-blue-500 mt-5">
-          <label for="profileImage" class="cursor-pointer">Change </label>
+          <label *ngIf="!profileImageFile" for="profileImage" class="cursor-pointer">Change </label>
           <input
             type="file"
             id="profileImage"

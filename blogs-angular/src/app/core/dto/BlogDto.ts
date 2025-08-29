@@ -9,6 +9,8 @@ export class BlogResponseDto {
   createdOn!: string;
   updatedOn!: string;
   user: UserResponseDto;
+likesCount: any;
+  likedUsers: any;
 }
 
 export interface BlogRequestDto {

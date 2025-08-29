@@ -2,6 +2,9 @@ package com.offcl.blogs_service.dto;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import com.offcl.blogs_service.entity.Likes;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,5 +36,11 @@ public class BlogResponseDto {
 	private LocalDateTime updatedOn;
 	
 	private UserResponseDto  user;
+	
+	private  Long likesCount ;
+	
+	private Long commentsCount;
+	
+	private List<Long> likedUsers;
 	
 }

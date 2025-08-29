@@ -5,49 +5,37 @@
   <div class="flex justify-between mb-4">
     <div class="flex items-center">
       <img
-        src="assets/images/men.png"
+        [src]="getImageURI(blog.user.profileImageUrl)"
         class="w-10 h-10 rounded-full"
         alt="avatar"
       />
       <div class="ml-3">
-        <h2 class="font-semibold">Micheal vaughn</h2>
-        <h4 class="text-gray-400 text-[0.5rem]">28 minutes ago</h4>
+        <h2 class="font-semibold">
+          {{ blog.user.firstName }} {{ blog.user.lastName }}
+        </h2>
+        <h4 class="text-gray-400 text-[0.5rem]">
+          {{ blog.publishedOn | date: 'short' }}
+        </h4>
       </div>
     </div>
-    <div class="text-red-600">
+    <!-- <div class="text-red-600 flex items-center">
       <mat-icon>favorite</mat-icon>
-    </div>
+      <span class="ml-1 text-xs">{{ blog.likesCount }}</span>
+    </div> -->
   </div>
 
   <!-- Content Section -->
   <div class="relative h-full pr-1">
     <h3 class="text-[1.2rem] font-semibold mb-1">
-      Understanding JavaScript Closures: A Simple Guide
+      {{ blog.title }}
     </h3>
     <h5 class="text-blue-500 text-[0.8rem] mb-2">
-      JavaScript / Web Development
+      {{ blog.category }}
     </h5>
 
     <div class="relative h-[265px] overflow-hidden">
       <p class="text-justify text-sm leading-relaxed">
-        JavaScript is known for its flexibility, and one of the concepts that
-        showcases this power is the closure. Though it may sound complex, a
-        closure is simply the ability of a function to access variables from its
-        outer scope, even after the outer function has finished executing.
-        Closures are especially useful because they allow for data privacy.
-        Developers often use them to create variables that are hidden from the
-        outside world but can still be manipulated internally. This is useful in
-        situations where you want to store and update a value without exposing
-        it directly. For example, closures are used in many JavaScript libraries
-        and frameworks to manage state, build private methods, or write more
-        modular code. They also play a key role in event handling and callback
-        functions, especially in asynchronous operations. In everyday
-        development, understanding closures can help improve the way you
-        structure your code. It can lead to cleaner, more efficient applications
-        and reduce the chances of bugs caused by unintended variable access.
-        Though closures might take some time to fully understand, they are a
-        powerful tool in the JavaScript language that every developer should
-        take the time to learn and master.
+        {{ blog.content }}
       </p>
 
       <!-- Gradient Fade Overlay -->
@@ -59,12 +47,10 @@
     <!-- Read More Button -->
     <div class="mt-3 text-right">
       <a
-        routerLink="/blogs/view/1"
+        [routerLink]="'/blogs/view/' + blog.blogId"
         class="text-blue-600 text-sm font-semibold hover:underline"
         >Read more</a
       >
     </div>
   </div>
 </div>
-
-

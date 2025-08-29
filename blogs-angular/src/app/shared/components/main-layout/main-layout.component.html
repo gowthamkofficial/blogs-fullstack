@@ -16,28 +16,13 @@
         <div class="link-list">
           <ul>
             <li
-              class="active-link text-[1rem] px-[15px] py-[10px] text-white mt-[20px] hover:bg-white hover:text-[#6267a9] hover:rounded-[10px] flex items-center gap-2"
-            >
-              <mat-icon>home</mat-icon>
-              <a routerLink="/blogs/list">Home</a>
-            </li>
-            <!-- <li
+              *ngFor="let item of menuItems"
+              routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{ exact: true }"
               class="text-[1rem] px-[15px] py-[10px] text-white mt-[20px] hover:bg-white hover:text-[#6267a9] hover:rounded-[10px] flex items-center gap-2"
             >
-              <mat-icon>dashboard</mat-icon>
-              <a href="">Dashboard</a>
-            </li> -->
-            <li
-              class="text-[1rem] px-[15px] py-[10px] text-white mt-[20px] hover:bg-white hover:text-[#6267a9] hover:rounded-[10px] flex items-center gap-2"
-            >
-              <mat-icon>article</mat-icon>
-              <a routerLink="/my-blogs">My Blogs</a>
-            </li>
-            <li
-              class="text-[1rem] px-[15px] py-[10px] text-white mt-[20px] hover:bg-white hover:text-[#6267a9] hover:rounded-[10px] flex items-center gap-2"
-            >
-              <mat-icon>person</mat-icon>
-              <a routerLink="/my-profile">My Profile</a>
+              <mat-icon>{{ item.icon }}</mat-icon>
+              <a [routerLink]="item.route">{{ item.label }}</a>
             </li>
           </ul>
         </div>
@@ -46,21 +31,23 @@
       <div class="bottom-section pb-[50px]">
         <ul>
           <li
-            class="text-[1rem] px-[15px] py-[10px] text-white mt-[20px] hover:bg-white hover:text-[#6267a9] hover:rounded-[10px] flex items-center gap-2"
+            (click)="logout()"
+            class="text-[1rem] px-[15px] py-[10px] text-white mt-[20px] hover:bg-white hover:text-[#6267a9] flex items-center gap-2 cursor-pointer"
           >
             <mat-icon>logout</mat-icon>
-            <a href="">Logout</a>
+            <span>Logout</span>
           </li>
         </ul>
       </div>
     </div>
   </mat-drawer>
 
-  <mat-drawer 
+  <mat-drawer
+    autoFocus="false"
     #rightDrawer
     position="end"
     mode="over"
-    class= " right-drawer w-[600px] overflow-y-auto bg-white p-4"
+    class="right-drawer w-[600px] overflow-y-auto bg-white p-4"
   >
     <app-comments
       *ngIf="(drawerService.drawer$ | async) == 'comments'"
@@ -72,8 +59,9 @@
         class="border-l-1 border-white rounded-[8px] flex items-center justify-end"
       >
         <span class="flex gap-x-5 items-center text-[1rem] text-white uppercase"
-          >Steve Vaughn<img
-            src="assets/images/men.png"
+          >{{ userData?.firstName }} {{ userData?.lastName
+          }}<img
+            [src]="getImageURI(userData?.profileImageUrl)"
             class="w-10 h-10 rounded-full"
             alt=""
             srcset=""

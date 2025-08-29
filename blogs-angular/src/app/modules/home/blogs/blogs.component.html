@@ -1,18 +1,13 @@
 <section
-  class="w-full min-h-screen grid grid-cols-3 gap-4 p-4"
+  class="w-full h-screen  grid grid-cols-3 gap-4 overflow-scroll"
   infiniteScroll
   [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="150"
+  [infiniteScrollThrottle]="50"
   (scrolled)="onScroll($event)"
+  [scrollWindow]="false"
 >
-  <ng-container *ngFor="let blog of blogList">
+  <ng-container class="" *ngFor="let blog of blogList">
     <blog-card [blog]="blog"></blog-card>
   </ng-container>
-
-  <!-- Loading Spinner -->
-  <div class="col-span-3 flex justify-center py-4" *ngIf="loading">
-    <p class="text-gray-500">Loading more blogs...</p>
-  </div>
-
 
 </section>

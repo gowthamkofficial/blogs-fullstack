@@ -156,19 +156,32 @@ export class MyProfileComponent implements OnInit {
 
   // Profile Image Update
 
-  onFileSelected(event: Event) {
-    const file = (event.target as HTMLInputElement).files?.[0];
-    if (file) {
-      this.profileImageFile = file;
+ onFileSelected(event: Event) {
+  const file = (event.target as HTMLInputElement).files?.[0];
+  if (file) {
+    // ✅ Validate file type
+    if (!file.type.startsWith('image/')) {
+      this.toaster.warning(`Only image files are allowed!`);
 
-      // Preview the image
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.profileImagePreview = reader.result;
-      };
-      reader.readAsDataURL(file);
+      return;
     }
+
+    const maxSizeInMB = 1;
+    if (file.size > maxSizeInMB * 1024 * 1024) {
+      this.toaster.warning(`File size must be less than ${maxSizeInMB} MB`);
+      return;
+    }
+
+    this.profileImageFile = file;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.profileImagePreview = reader.result;
+    };
+    reader.readAsDataURL(file);
   }
+}
+
 
   uploadProfileImage() {
     if (!this.profileImageFile) {
@@ -189,6 +202,7 @@ export class MyProfileComponent implements OnInit {
         if (res?.data?.fileUrl) {
           this.profileForm.patchValue({ profileImageUrl: res.data.fileUrl });
           this.profileImagePreview = '';
+          this.profileImageFile = null;
         }
       },
       error: (err) => {
@@ -203,16 +217,20 @@ export class MyProfileComponent implements OnInit {
     if (this.profileImagePreview) {
       return this.profileImagePreview as string;
     }
-  
+
     const url = this.profileForm.get('profileImageUrl')?.value;
-  console.log(url);
-  
+    console.log(url, 'let me check the url');
+
     if (url) {
+      // Check if url already starts with http or https
+      if (/^https?:\/\//i.test(url)) {
+        return url;
+      }
+      // Otherwise, prepend environment.apiURL
       return `${environment.apiURL}${url}`;
     }
-  
+
     // Default placeholder
     return 'assets/images/user.png';
   }
-  
 }

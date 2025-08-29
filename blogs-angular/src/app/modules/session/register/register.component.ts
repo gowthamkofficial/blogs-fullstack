@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.pattern(/^[0-9]{10}$/),
       ]),
-      email: new FormControl('gowtham.k@technogenesis.in', [
+      email: new FormControl('gowtham.k@gmail.com', [
         Validators.required,
         Validators.email,
       ]),

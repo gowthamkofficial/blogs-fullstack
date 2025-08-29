@@ -1,102 +1,56 @@
-<section class="w-full h-auto px-50 relative">
+<section class="w-full h-auto px-50 relative" *ngIf="blog">
   <div class="title w-full">
+    <!-- Blog Title -->
     <h2 class="text-3xl font-semibold text-gray-700 text-justify text-wrap">
-      Understanding JavaScript Closures: A Simple Guide
+      {{ blog?.title }}
     </h2>
+
+    <!-- Category -->
     <p class="text-[1.2rem] mt-5 font-medium text-blue-500">
-      JavaScript / Web Development
+      {{ blog?.category }}
     </p>
 
+    <!-- Author Section -->
     <div
       class="author mt-5 flex justify-between border-y-1 border-y-gray-200 py-2"
     >
       <div class="flex gap-2 items-center">
         <img
+          [src]="getImageURI(blog?.user?.profileImageUrl)"
           class="w-10 h-10 rounded-full"
-          src="assets/images/men.png"
-          alt=""
-          srcset=""
+          alt="author"
         />
-        <div class="">
-          <h4 class="font-medium px-2 text-[grey]">Steve Vaughn</h4>
-
+        <div>
+          <h4 class="font-medium px-2 text-[grey]">
+            {{ blog?.user?.firstName }} {{ blog?.user?.lastName }}
+          </h4>
           <h4 class="text-[0.8rem] font-thin px-2 text-[grey]">
-            29 minutes ago
+            {{ blog?.createdOn | date : "short" }}
           </h4>
         </div>
       </div>
 
+      <!-- Likes & Comments -->
       <div class="likes-comments flex items-center gap-3">
-        <span class="text-red-500"
-          ><mat-icon>favorite</mat-icon> <small>20</small></span
-        >
-        <span class=""
-          ><mat-icon (click)="openCommentsDrawer()">comment</mat-icon
-          ><small>21</small></span
-        >
+        <span class="text-red-500 cursor-pointer" (click)="blog?.likedUsers?.includes(userId) ? unlikeBlog() : likeBlog()">
+          <mat-icon >
+            {{ blog?.likedUsers?.includes(userId) ? "favorite" : "favorite_border" }}
+          </mat-icon>
+          
+          <small>{{ blog?.likesCount }}</small>
+        </span>
+        <span class="cursor-pointer">
+          <mat-icon (click)="openCommentsDrawer()">comment</mat-icon>
+          <small>{{ blog?.commentsCount }}</small>
+        </span>
       </div>
     </div>
 
+    <!-- Blog Content -->
     <div class="content-section mt-10">
-      <p class="text-justify text-2xl">
-        JavaScript is known for its flexibility, and one of the concepts that
-        showcases this power is the closure. Though it may sound complex, a
-        closure is simply the ability of a function to access variables from its
-        outer scope, even after the outer function has finished executing.
-        Closures are especially useful because they allow for data privacy.
-        Developers often use them to create variables that are hidden from the
-        outside world but can still be manipulated internally. This is useful in
-        situations where you want to store and update a value without exposing
-        it directly. For example, closures are used in many JavaScript libraries
-        and frameworks to manage state, build private methods, or write more
-        modular code. They also play a key role in event handling and callback
-        functions, especially in asynchronous operations. In everyday
-        development, understanding closures can help improve the way you
-        structure your code. It can lead to cleaner, more efficient applications
-        and reduce the chances of bugs caused by unintended variable access.
-        Though closures might take some time to fully understand, they are a
-        powerful tool in the JavaScript language that every developer should
-        take the time to learn and master. JavaScript is known for its
-        flexibility, and one of the concepts that showcases this power is the
-        closure. Though it may sound complex, a closure is simply the ability of
-        a function to access variables from its outer scope, even after the
-        outer function has finished executing. Closures are especially useful
-        because they allow for data privacy. Developers often use them to create
-        variables that are hidden from the outside world but can still be
-        manipulated internally. This is useful in situations where you want to
-        store and update a value without exposing it directly. For example,
-        closures are used in many JavaScript libraries and frameworks to manage
-        state, build private methods, or write more modular code. They also play
-        a key role in event handling and callback functions, especially in
-        asynchronous operations. In everyday development, understanding closures
-        can help improve the way you structure your code. It can lead to
-        cleaner, more efficient applications and reduce the chances of bugs
-        caused by unintended variable access. Though closures might take some
-        time to fully understand, they are a powerful tool in the JavaScript
-        language that every developer should take the time to learn and master.
+      <p class="text-justify text-xl">
+        {{ blog?.content }}
       </p>
     </div>
   </div>
 </section>
-
-<!-- Understanding JavaScript Closures: A Simple Guide
-
-JavaScript / Web Development
-
-
-JavaScript is known for its flexibility, and one of the concepts that showcases
-this power is the closure. Though it may sound complex, a closure is simply the
-ability of a function to access variables from its outer scope, even after the
-outer function has finished executing. Closures are especially useful because
-they allow for data privacy. Developers often use them to create variables that
-are hidden from the outside world but can still be manipulated internally. This
-is useful in situations where you want to store and update a value without
-exposing it directly. For example, closures are used in many JavaScript
-libraries and frameworks to manage state, build private methods, or write more
-modular code. They also play a key role in event handling and callback
-functions, especially in asynchronous operations. In everyday development,
-understanding closures can help improve the way you structure your code. It can
-lead to cleaner, more efficient applications and reduce the chances of bugs
-caused by unintended variable access. Though closures might take some time to
-fully understand, they are a powerful tool in the JavaScript language that every
-developer should take the time to learn and master. -->

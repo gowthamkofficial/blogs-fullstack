@@ -24,7 +24,7 @@ export enum ApiEndpoints {
     GET_ALL_COMMENTS = 'getAllComments',
     GET_ALL_BLOGS = 'getAllBlogs',
     REMOVE_LIKE_BY_LIKEID = 'removeLike',
-    UNLIKE_BY_USERID_BLOGID=`/unlikeBlog`,
+    UNLIKE_BY_USERID_BLOGID=`unlikeBlog`,
     REMOVE_COMMENT_BY_COMMENTID = 'removeComment',
   }
   
