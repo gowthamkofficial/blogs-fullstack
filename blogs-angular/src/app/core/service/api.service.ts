@@ -28,7 +28,7 @@ export class ApiService {
     return this.http.get<T>(`${this.baseUrl}/${endpoint}`, { params: this.buildParams(params) });
   }
 
-  post<T>(endpoint: string, body: any, params?: any): Observable<T> {
+  post<T>(endpoint: string, body?: any, params?: any): Observable<T> {
     return this.http.post<T>(`${this.baseUrl}/${endpoint}`, body, { params: this.buildParams(params) });
   }
 

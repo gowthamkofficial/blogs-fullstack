@@ -11,11 +11,23 @@ export class BlogResponseDto {
   user: UserResponseDto;
 }
 
-
 export interface BlogRequestDto {
-  userId: number;        
-  title: string;         
-  category: string;      
-  publishedOn: string;   
+  userId: number;
+  title: string;
+  category: string;
+  publishedOn: string;
   content: string;
+}
+
+export class CommentRequestDto {
+  userId: number;
+  blogId: number;
+  commentText: string;
+}
+
+export class CommentResponseDto {
+  id: number;
+  commentText: string;
+  user: UserResponseDto;
+  createdOn: Date;
 }

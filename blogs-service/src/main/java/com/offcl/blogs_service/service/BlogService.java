@@ -130,6 +130,9 @@ public class BlogService {
 	}
 	
 	
+	
+	
+	
 	public ApiResponse<String> removeComment(Long id){
 		
 		Comments existingComment =  this.commentRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Comment not found with id "+id));
@@ -158,6 +161,14 @@ public class BlogService {
 		var saved = BlogsMapper.mapLikes(this.likeRepo.save(likeEntity));
 		
 		return new ApiResponse<LikeResponseDto>(ResponseStatus.Success,"You have liked successfully",saved);
+	}
+	
+	
+	public ApiResponse<String> unlikeByUserIdAndBlogId(Long userId,Long blogId){
+	Likes existingLike =  this.likeRepo.findByUserIdAndBlogId(userId,blogId).orElseThrow(()->new ResourceNotFoundException("Like not found with id "));
+		
+		this.likeRepo.deleteById(existingLike.getId());
+		return new ApiResponse<String>(ResponseStatus.Success,"Unliked blog successfully",null);
 	}
 	
 	

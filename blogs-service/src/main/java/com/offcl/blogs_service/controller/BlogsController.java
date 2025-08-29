@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.offcl.blogs_service.common.response.ApiResponse;
 import com.offcl.blogs_service.dto.CommentRequestDto;
+import com.offcl.blogs_service.dto.CommentResponseDto;
+import com.offcl.blogs_service.dto.LikeResponseDto;
 import com.offcl.blogs_service.service.BlogService;
 
 @RestController
@@ -54,14 +57,14 @@ public class BlogsController {
 	}
 	
 	
-	@GetMapping("/getAllComments")
-public ResponseEntity<?> getAllComments(@PathVariable(required=true) Long blogId){
+	@GetMapping("/getAllComments/{blogId}")
+public ResponseEntity<ApiResponse<List<CommentResponseDto>>> getAllComments(@PathVariable(required=true) Long blogId){
 		
 		return ResponseEntity.status(HttpStatus.OK).body(this.blogService.getAllComments(blogId));
 	}
 	
 	@GetMapping("/getAllLikes/{blogId}")
-public ResponseEntity<?> getAllLikes(@PathVariable(required=true) Long blogId){
+public ResponseEntity<ApiResponse<List<LikeResponseDto>>> getAllLikes(@PathVariable(required=true) Long blogId){
 		
 		return ResponseEntity.status(HttpStatus.OK).body(this.blogService.getAllLikes(blogId));
 	}
@@ -77,7 +80,10 @@ public ResponseEntity<?> getAllLikes(@PathVariable(required=true) Long blogId){
 		return ResponseEntity.status(HttpStatus.OK).body(this.blogService.addLike(userId, blogId));
 	}
 	
-	
+	@DeleteMapping("/unlikeBlog/{userId}/{blogId}")
+	public ResponseEntity<?> unlikeBlog(@PathVariable(required=true) Long userId,@PathVariable(required=true) Long blogId){
+		return ResponseEntity.status(HttpStatus.OK).body(this.blogService.unlikeByUserIdAndBlogId(userId, blogId));
+	}
 	
 	@DeleteMapping("/removeComment/{commentId}")
 	public ResponseEntity<?> removeComment(@PathVariable(required=true) Long commentId){

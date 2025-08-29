@@ -4,6 +4,7 @@ import { MaterialModule } from './material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './components/components.module';
 import { NgxSuneditorModule } from 'ngx-suneditor';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 @NgModule({
   declarations: [],
   imports: [
@@ -13,7 +14,8 @@ import { NgxSuneditorModule } from 'ngx-suneditor';
     ReactiveFormsModule,
     FormsModule,
     ComponentsModule,
-    NgxSuneditorModule 
+    NgxSuneditorModule ,
+    InfiniteScrollDirective  
   ],
   exports: [
     MaterialModule,
@@ -21,7 +23,8 @@ import { NgxSuneditorModule } from 'ngx-suneditor';
     ReactiveFormsModule,
     FormsModule,
     ComponentsModule,
-    NgxSuneditorModule 
+    NgxSuneditorModule ,
+    InfiniteScrollDirective 
   ],
 })
 export class SharedModule {}
